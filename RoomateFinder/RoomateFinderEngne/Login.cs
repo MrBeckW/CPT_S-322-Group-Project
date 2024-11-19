@@ -16,9 +16,12 @@ namespace RoomateFinderEngne
         /// <summary>
         /// creates a new user.
         /// </summary>
-        public void CreateNewUser()
+        public void CreateNewUser(string username, string password, string bio)
         {
-
+            ProfileManager profileManager = new ProfileManager();
+            PasswordManager passwordManager = new PasswordManager();
+            profileManager.CreateNewProfile(username, bio);
+            passwordManager.AddNewPassword(username, password);
         }
 
         /// <summary>

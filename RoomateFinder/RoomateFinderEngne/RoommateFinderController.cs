@@ -55,6 +55,11 @@ namespace RoomateFinderEngne
            profileManager = new ProfileManager();
         }
 
+        public void UpdateProfileManager()
+        {
+            this.profileManager = new ProfileManager();
+        }
+
         /// <summary>
         /// finds the active user's profile and sets it as the currently active user.
         /// </summary>

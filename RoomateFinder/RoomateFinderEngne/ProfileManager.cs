@@ -31,6 +31,7 @@ namespace RoomateFinderEngne
             {
                 throw new FileNotFoundException("profiles.csv not found.");
             }
+            reader.Close();
             LoadProfileDictionary();
         }
 
@@ -45,6 +46,7 @@ namespace RoomateFinderEngne
             profile.Username = username;
             profile.Bio = bio;
             userProfiles.Add(username, profile);
+            SaveProfilesToCsv();
         }
 
         /// <summary>

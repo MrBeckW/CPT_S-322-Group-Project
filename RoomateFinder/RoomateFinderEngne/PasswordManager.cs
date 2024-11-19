@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace RoomateFinderEngne
 {
@@ -38,6 +39,7 @@ namespace RoomateFinderEngne
             }
 
             LoadPasswordDictionary();
+            this.reader.Close();
         }
 
         /// <summary>
@@ -50,6 +52,30 @@ namespace RoomateFinderEngne
                 var line = reader.ReadLine();
                 var values = line.Split(',');
                 passwordDictionary[values[0]] = values[1];
+            }
+        }
+
+        /// <summary>
+        /// Adds a new password to the dictionary.
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        public void AddNewPassword(string username, string password)
+        {
+            this.passwordDictionary[username] = password;
+
+            savePasswordDictionary();
+        }
+
+        private void savePasswordDictionary()
+        {
+            using (StreamWriter writer = new StreamWriter(@path, false))
+            {
+                foreach (var key in passwordDictionary.Keys)
+                {
+                    writer.WriteLine($"{key},{passwordDictionary[key]},");
+                }
+                writer.Close();
             }
         }
 

@@ -10,6 +10,8 @@ namespace RoomateFinder
         /// </summary>
         private RoomateFinderController controller;
 
+        private NewProfileFromLoginForm form;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="LoginForm"/> class.
         /// Form that displays the Login screen.
@@ -19,6 +21,8 @@ namespace RoomateFinder
             this.InitializeComponent();
 
             this.controller = new RoomateFinderController();
+            this.form = new NewProfileFromLoginForm();
+            this.form.SubmitEvent += this.AddProfile;
             this.label3.Text = string.Empty;
         }
 
@@ -84,7 +88,14 @@ namespace RoomateFinder
         /// <param name="e">e.</param>
         private void button2_Click(object sender, EventArgs e)
         {
+           this.form.ShowDialog();
+        }
 
+        private void AddProfile(object? sender, EventArgs e)
+        {
+            string[] userInfo = ((UserInfoEventArgs)e).UserInfo;
+            this.controller.newLogin.CreateNewUser(userInfo[0], userInfo[1], userInfo[2]);
+            this.controller.UpdateProfileManager();
         }
     }
 }
